@@ -1,0 +1,2 @@
+echo 'This will take a lot of time...'
+docker build -t fgrehm/netbeans:v8.0.1 .
