@@ -16,7 +16,7 @@ RUN wget http://download.netbeans.org/netbeans/8.0.1/final/bundles/netbeans-8.0.
     chmod +x /tmp/netbeans.sh && \
     echo 'Installing netbeans' && \
     /tmp/netbeans.sh --silent --state /tmp/state.xml && \
-    rm /tmp/*
+    rm -rf /tmp/*
 
 RUN mkdir -p /home/developer && \
     echo "developer:x:1000:1000:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
