@@ -18,7 +18,10 @@ RUN wget http://download.netbeans.org/netbeans/8.0.1/final/bundles/netbeans-8.0.
     /tmp/netbeans.sh --silent --state /tmp/state.xml && \
     rm -rf /tmp/*
 
-RUN mkdir -p /home/developer && \
+ADD run /usr/local/bin/netbeans
+
+RUN chmod +x /usr/local/bin/netbeans && \
+    mkdir -p /home/developer && \
     echo "developer:x:1000:1000:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
     echo "developer:x:1000:" >> /etc/group && \
     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
@@ -28,4 +31,4 @@ RUN mkdir -p /home/developer && \
 USER developer
 ENV HOME /home/developer
 WORKDIR /home/developer
-CMD /usr/local/netbeans-8.0.1/bin/netbeans
+CMD /usr/local/bin/netbeans

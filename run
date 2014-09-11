@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Make sure the user data directory is owned by the developer user
+if [ -d /home/developer/.netbeans ]; then
+  sudo chown developer:developer /home/developer/.netbeans
+fi
+exec /usr/local/netbeans-8.0.1/bin/netbeans
