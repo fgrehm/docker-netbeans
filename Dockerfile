@@ -29,7 +29,24 @@ RUN chmod +x /usr/local/bin/netbeans && \
     chmod 0440 /etc/sudoers.d/developer && \
     chown developer:developer -R /home/developer
 
+RUN apt-get update && \
+  apt-get install -y fontconfig libfreetype6 software-properties-common && \
+  add-apt-repository -y ppa:no1wantdthisname/ppa && \
+  apt-get update && \
+  apt-get install -y fontconfig-infinality fonts-droid && \
+  rm /etc/fonts/conf.avail/52-infinality.conf && \
+  ln -s /etc/fonts/infinality/infinality.conf /etc/fonts/conf.avail/52-infinality.conf && \
+  /etc/fonts/infinality/infctl.sh setstyle win7
+
+COPY netbeans.conf        /usr/local/netbeans-8.0.1/etc/netbeans.conf
+COPY 41-repl-os-win.conf /etc/fonts/infinality/conf.d/41-repl-os-win.conf
+
 USER developer
+
+COPY Inconsolata.ttf /home/developer/.fonts/Inconsolata.ttf
+
+RUN sudo fc-cache -f -v
+
 ENV HOME /home/developer
 WORKDIR /home/developer
 CMD /usr/local/bin/netbeans
